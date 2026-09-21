@@ -1,0 +1,1 @@
+import {z} from 'zod'; export const paymentSchema=z.object({name:z.string().min(2).max(100),email:z.string().email().max(160),utr:z.string().min(6).max(80).regex(/^[A-Za-z0-9\- ]+$/),screenshot:z.string().url().optional().or(z.literal(''))});

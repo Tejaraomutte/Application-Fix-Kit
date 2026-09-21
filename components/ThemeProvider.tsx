@@ -1,0 +1,3 @@
+'use client'; import {createContext,useContext,useEffect,useState} from 'react';
+const C=createContext({dark:false,toggle:()=>{}}); export const useTheme=()=>useContext(C);
+export function ThemeProvider({children}:{children:React.ReactNode}){const [dark,setDark]=useState(false); useEffect(()=>{const saved=localStorage.getItem('afk-theme'); const d=saved?saved==='dark':window.matchMedia('(prefers-color-scheme: dark)').matches; setDark(d); document.documentElement.classList.toggle('dark',d)},[]); const toggle=()=>setDark(v=>{const n=!v; document.documentElement.classList.toggle('dark',n);localStorage.setItem('afk-theme',n?'dark':'light');return n}); return <C.Provider value={{dark,toggle}}>{children}</C.Provider>}

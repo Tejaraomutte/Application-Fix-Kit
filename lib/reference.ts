@@ -1,0 +1,1 @@
+export function makeReference(){const d=new Date();const date=d.toISOString().slice(0,10).replaceAll('-','');const code=Math.random().toString(36).slice(2,8).toUpperCase();return `AFK-${date}-${code}`}
