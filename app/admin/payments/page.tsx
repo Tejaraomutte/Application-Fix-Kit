@@ -7,6 +7,14 @@ export default function AdminPage() {
   const [ref, setRef] = useState('');
   const [status, setStatus] = useState('');
   const [items, setItems] = useState<any[]>([]);
+  const [showSecret, setShowSecret] = useState(false);
+
+  useEffect(() => {
+    const urlSecret = new URLSearchParams(window.location.search).get('secret') || '';
+    if (urlSecret) {
+      setSecret(urlSecret);
+    }
+  }, []);
 
   async function loadItems() {
     const headers: Record<string, string> = { 'Content-Type': 'application/json' };
@@ -27,7 +35,15 @@ export default function AdminPage() {
 
   useEffect(() => {
     loadItems();
-  }, []);
+  }, [secret]);
+
+  function unlockAdmin() {
+    if (!secret.trim()) return;
+
+    const params = new URLSearchParams(window.location.search);
+    params.set('secret', secret);
+    window.location.href = `/admin/payments?${params.toString()}`;
+  }
 
   async function action(kind: 'approve' | 'reject') {
     setStatus('Processing…');
@@ -58,13 +74,24 @@ export default function AdminPage() {
         <p className="mt-2 text-muted">For MVP operations. Keep this route private and never share the secret.</p>
 
         <div className="mt-8 space-y-4">
-          <input
-            className="input"
-            placeholder="Admin secret (optional)"
-            type="password"
-            value={secret}
-            onChange={(e) => setSecret(e.target.value)}
-          />
+          <div className="relative">
+            <input
+              className="input w-full pr-12"
+              placeholder="Admin secret"
+              type={showSecret ? 'text' : 'password'}
+              value={secret}
+              onChange={(e) => setSecret(e.target.value)}
+            />
+            <button
+              type="button"
+              className="absolute right-3 top-1/2 -translate-y-1/2 text-sm text-muted"
+              onClick={() => setShowSecret((value) => !value)}
+              aria-label={showSecret ? 'Hide admin secret' : 'Show admin secret'}
+            >
+              {showSecret ? 'Hide' : 'Show'}
+            </button>
+          </div>
+          <button className="btn btn-primary w-full" onClick={unlockAdmin}>Unlock admin access</button>
           <input className="input" placeholder="Payment reference" value={ref} onChange={(e) => setRef(e.target.value)} />
           <div className="grid grid-cols-2 gap-3">
             <button className="btn btn-primary" onClick={() => action('approve')}>Approve</button>
