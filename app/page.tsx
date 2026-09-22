@@ -25,7 +25,7 @@ export default function Home() {
     <main className="page-shell">
       <section className="hero-section">
         <div className="container">
-          <div className="hero-badge">BUILT FOR ENGINEERING STUDENTS • ONE-TIME ₹499</div>
+          <div className="hero-badge">BUILT FOR ENGINEERING STUDENTS • ONE-TIME ₹299</div>
 
           <div className="hero-grid">
             <div>
@@ -40,7 +40,7 @@ export default function Home() {
 
               <div className="hero-actions">
                 <Link href="/pay" className="btn btn-primary">
-                  Get the Application Fix Kit — ₹499
+                  Get Application Fix Kit — ₹299
                 </Link>
                 <a href="#inside" className="btn btn-secondary">
                   See what’s inside
@@ -128,7 +128,7 @@ export default function Home() {
               <h2>Make stronger applications with less guesswork.</h2>
             </div>
             <Link href="/pay" className="btn btn-primary">
-              Get the kit — ₹499
+              Get the kit — ₹299
             </Link>
           </div>
         </div>
