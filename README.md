@@ -20,7 +20,7 @@ npm install
 cp .env.example .env.local
 npm run dev
 ```
-Open http://localhost:3000
+Open https://application-fix-kit.vercel.app
 
 ## Production setup
 1. Set your UPI ID, support email and site URL.
